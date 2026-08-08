@@ -1,0 +1,1900 @@
+/* 
+ * Catppuccin Mocha Theme for Mainsail - Safe Version
+ * https://github.com/catppuccin/catppuccin
+ * A soothing pastel theme for 3D printer management
+ */
+
+/* ===== Catppuccin Mocha Color Palette ===== */
+:root {
+  /* Base Colors */
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+  
+  /* Surface Colors */
+  --ctp-surface0: #313244;
+  --ctp-surface1: #45475a;
+  --ctp-surface2: #585b70;
+  
+  /* Text Colors */
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  
+  /* Accent Colors */
+  --ctp-blue: #89b4fa;
+  --ctp-sapphire: #74c7ec;
+  --ctp-sky: #89dceb;
+  --ctp-teal: #94e2d5;
+  --ctp-green: #a6e3a1;
+  --ctp-yellow: #f9e2af;
+  --ctp-peach: #fab387;
+  --ctp-maroon: #eba0ac;
+  --ctp-red: #f38ba8;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+}
+
+/* ===== Safe Vuetify Color Overrides ===== */
+:root {
+  /* Only override essential theme colors */
+  --v-primary-base: var(--ctp-blue) !important;
+  --v-anchor-base: var(--ctp-blue) !important;
+}
+
+/* ===== Main Application Background ===== */
+.v-application {
+  background-color: var(--ctp-base) !important;
+}
+
+.v-main {
+  background-color: var(--ctp-base) !important;
+}
+
+/* ===== Navigation Drawer - Darkest Level ===== */
+.v-navigation-drawer {
+  background-color: var(--ctp-crust) !important;
+  background-image: none !important;
+  border-right: 1px solid var(--ctp-surface0) !important;
+  border-radius: 0 16px 16px 0 !important;
+  overflow-x: hidden !important;
+}
+
+/* Remove any background images from sidebar - Following Mainsail docs */
+.v-navigation-drawer::before,
+.v-navigation-drawer .v-navigation-drawer__background,
+.v-navigation-drawer .v-navigation-drawer__image {
+  background-image: none !important;
+  background: var(--ctp-crust) !important;
+  opacity: 1 !important;
+}
+
+/* Override any inline background styles */
+.v-navigation-drawer[style*="background-image"] {
+  background-image: none !important;
+  background: var(--ctp-crust) !important;
+}
+
+/* Force remove background on all child elements that might have images */
+.v-navigation-drawer * {
+  background-image: none !important;
+}
+
+/* Specific override for Mainsail's sidebar background system */
+.v-navigation-drawer .v-sheet {
+  background-color: var(--ctp-crust) !important;
+  background-image: none !important;
+}
+
+/* ===== Cards - Conservative Styling ===== */
+.v-card {
+  background-color: var(--ctp-mantle) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.v-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(17, 17, 27, 0.4) !important;
+  border-color: var(--ctp-surface1) !important;
+}
+
+/* Make sure card text is visible */
+.v-card .v-card__title {
+  color: var(--ctp-text) !important;
+}
+
+.v-card .v-card__text {
+  color: var(--ctp-subtext1) !important;
+}
+
+/* ===== App Bar ===== */
+.v-app-bar {
+  background-color: var(--ctp-base) !important;
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+}
+
+.v-toolbar__title {
+  color: var(--ctp-text) !important;
+}
+
+/* ===== Buttons - Enhanced with Accent Colors ===== */
+.v-btn {
+  border-radius: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Only add margin to buttons that need spacing */
+.v-btn + .v-btn {
+  margin-left: 8px !important;
+}
+
+/* Button groups should have no extra margins */
+.v-btn-group .v-btn {
+  margin: 0 !important;
+}
+
+.v-btn-group .v-btn:not(:first-child) {
+  margin-left: 1px !important;
+}
+
+/* Macro buttons get smaller margins */
+[class*="macro"] .v-btn {
+  margin: 2px !important;
+}
+
+.v-btn.primary, .v-btn--color-primary {
+  background-color: var(--ctp-blue) !important;
+  color: var(--ctp-base) !important;
+  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.3) !important;
+}
+
+.v-btn.primary:hover, .v-btn--color-primary:hover {
+  background-color: var(--ctp-sapphire) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(137, 180, 250, 0.4) !important;
+}
+
+.v-btn.secondary, .v-btn--color-secondary {
+  background-color: var(--ctp-mauve) !important;
+  color: var(--ctp-base) !important;
+  box-shadow: 0 2px 8px rgba(203, 166, 247, 0.3) !important;
+}
+
+.v-btn.secondary:hover, .v-btn--color-secondary:hover {
+  background-color: var(--ctp-pink) !important;
+  transform: translateY(-1px) !important;
+}
+
+.v-btn.success, .v-btn--color-success, .v-btn.green {
+  background-color: var(--ctp-green) !important;
+  color: var(--ctp-base) !important;
+  box-shadow: 0 2px 8px rgba(166, 227, 161, 0.3) !important;
+}
+
+.v-btn.success:hover, .v-btn.green:hover {
+  background-color: var(--ctp-teal) !important;
+  transform: translateY(-1px) !important;
+}
+
+.v-btn.warning, .v-btn--color-warning, .v-btn.orange {
+  background-color: var(--ctp-peach) !important;
+  color: var(--ctp-base) !important;
+  box-shadow: 0 2px 8px rgba(250, 179, 135, 0.3) !important;
+}
+
+.v-btn.warning:hover, .v-btn.orange:hover {
+  background-color: var(--ctp-yellow) !important;
+  transform: translateY(-1px) !important;
+}
+
+.v-btn.error, .v-btn--color-error, .v-btn.red {
+  background-color: var(--ctp-red) !important;
+  color: var(--ctp-base) !important;
+  box-shadow: 0 2px 8px rgba(243, 139, 168, 0.3) !important;
+}
+
+.v-btn.error:hover, .v-btn.red:hover {
+  background-color: var(--ctp-maroon) !important;
+  transform: translateY(-1px) !important;
+}
+
+.v-btn--outlined {
+  border-color: var(--ctp-surface1) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 12px !important;
+  background-color: transparent !important;
+}
+
+.v-btn--outlined:hover {
+  background-color: var(--ctp-surface0) !important;
+  border-color: var(--ctp-blue) !important;
+}
+
+.v-btn--outlined.primary {
+  border-color: var(--ctp-blue) !important;
+  color: var(--ctp-blue) !important;
+}
+
+.v-btn--outlined.secondary {
+  border-color: var(--ctp-mauve) !important;
+  color: var(--ctp-mauve) !important;
+}
+
+.v-btn--text {
+  color: var(--ctp-blue) !important;
+  border-radius: 12px !important;
+  background-color: transparent !important;
+}
+
+.v-btn--text:hover {
+  background-color: rgba(137, 180, 250, 0.1) !important;
+}
+
+.v-btn--fab {
+  background: linear-gradient(135deg, var(--ctp-blue), var(--ctp-sapphire)) !important;
+  color: var(--ctp-base) !important;
+}
+
+/* Specific override for dark theme buttons with background */
+.theme--dark.v-btn.v-btn--has-bg {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+}
+
+.theme--dark.v-btn.v-btn--has-bg:hover {
+  background-color: var(--ctp-surface1) !important;
+}
+
+.theme--dark.v-btn.v-btn--has-bg.primary {
+  background-color: var(--ctp-blue) !important;
+  color: var(--ctp-base) !important;
+}
+
+.theme--dark.v-btn.v-btn--has-bg.secondary {
+  background-color: var(--ctp-mauve) !important;
+  color: var(--ctp-base) !important;
+}
+
+.theme--dark.v-btn.v-btn--has-bg.success {
+  background-color: var(--ctp-green) !important;
+  color: var(--ctp-base) !important;
+}
+
+.theme--dark.v-btn.v-btn--has-bg.warning {
+  background-color: var(--ctp-peach) !important;
+  color: var(--ctp-base) !important;
+}
+
+.theme--dark.v-btn.v-btn--has-bg.error {
+  background-color: var(--ctp-red) !important;
+  color: var(--ctp-base) !important;
+}
+
+/* ===== Text Inputs - Enhanced Rounding with Better Controls ===== */
+.v-text-field .v-input__slot {
+  background-color: var(--ctp-surface0) !important;
+  border: 1px solid var(--ctp-surface1) !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+}
+
+.v-text-field .v-input__slot:hover {
+  border-color: var(--ctp-blue) !important;
+}
+
+.v-text-field--focused .v-input__slot {
+  border-color: var(--ctp-blue) !important;
+  box-shadow: 0 0 0 2px rgba(137, 180, 250, 0.2) !important;
+}
+
+.v-text-field--outlined .v-input__control .v-input__slot {
+  background: transparent !important;
+  border-radius: 12px !important;
+}
+
+.v-text-field--outlined fieldset {
+  border-color: var(--ctp-surface1) !important;
+  border-radius: 12px !important;
+}
+
+.v-text-field--outlined:hover fieldset {
+  border-color: var(--ctp-blue) !important;
+}
+
+.v-text-field input {
+  color: var(--ctp-text) !important;
+}
+
+.v-label {
+  color: var(--ctp-subtext1) !important;
+}
+
+/* ===== Enhanced Number Input Controls - True Pill Design ===== */
+/* High specificity selectors matching the exact structure */
+
+/* Target the container that holds the stepper buttons */
+form > div > div.v-input__append-outer,
+.v-text-field form > div > div.v-input__append-outer,
+.panel form > div > div.v-input__append-outer {
+  position: relative !important;
+  display: flex !important;
+  align-items: stretch !important;
+  margin-left: -1px !important;
+  z-index: 2 !important;
+}
+
+/* Create the pill background container */
+form > div > div.v-input__append-outer > div,
+.v-text-field form > div > div.v-input__append-outer > div,
+.panel form > div > div.v-input__append-outer > div {
+  background-color: var(--ctp-surface1) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--ctp-surface2) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  width: 36px !important;
+  height: 40px !important;
+  position: relative !important;
+}
+
+/* Ultra-specific button targeting - both mt-n3 (up) and mb-n3 (down) buttons */
+form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small,
+form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small,
+.panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small,
+.panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small,
+.machine-settings-panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small,
+.machine-settings-panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small,
+.extruder-control-panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small,
+.extruder-control-panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 20px !important;
+  min-width: 36px !important;
+  min-height: 20px !important;
+  font-size: 12px !important;
+  color: var(--ctp-subtext1) !important;
+  transition: background-color 0.15s ease !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 1 !important;
+  position: relative !important;
+}
+
+/* Hover states with ultra-specific targeting - both up and down buttons */
+form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:hover,
+form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:hover,
+.panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small:hover,
+.panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small:hover,
+.machine-settings-panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:hover,
+.machine-settings-panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:hover,
+.extruder-control-panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:hover,
+.extruder-control-panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:hover {
+  background-color: var(--ctp-blue) !important;
+  color: var(--ctp-base) !important;
+}
+
+/* First button (top) with ultra-specific targeting - fully rounded top */
+form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:first-child,
+form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:first-child,
+.panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small:first-child,
+.panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small:first-child {
+  border-radius: 11px 11px 0 0 !important;
+  border-bottom: 1px solid var(--ctp-surface2) !important;
+}
+
+/* Last button (bottom) with ultra-specific targeting - fully rounded bottom */
+form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:last-child,
+form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small:last-child,
+.panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small:last-child,
+.panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small:last-child {
+  border-radius: 0 0 11px 11px !important;
+}
+
+/* Icon styling with ultra-specific targeting - both up and down buttons */
+form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small .v-icon,
+form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.theme--dark.v-size--small .v-icon,
+.panel form > div > div.v-input__append-outer > div > button.mt-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small .v-icon,
+.panel form > div > div.v-input__append-outer > div > button.mb-n3.v-btn.v-btn--icon.v-btn--plain.v-btn--round.v-size--small .v-icon {
+  font-size: 14px !important;
+  line-height: 1 !important;
+}
+
+/* Ensure inputs have proper spacing */
+.v-text-field input[type="number"] {
+  padding-right: 42px !important;
+}
+
+/* Fix input text cutoff when suffix is present */
+.v-text-field .v-text-field__suffix {
+  color: var(--ctp-subtext1) !important;
+  font-size: 14px !important;
+  padding-left: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 1 !important;
+}
+
+/* Adjust input padding for all text fields to prevent suffix overlap */
+.v-text-field .v-text-field__slot input {
+  padding-right: 40px !important;
+}
+
+/* Specific override for disabled inputs with suffixes */
+.v-text-field.v-input--is-disabled .v-text-field__slot input {
+  padding-right: 40px !important;
+  color: var(--ctp-subtext0) !important;
+}
+
+/* Ensure number inputs still have correct padding for stepper buttons */
+.v-text-field input[type="number"]:not(.v-text-field__slot input) {
+  padding-right: 42px !important;
+}
+
+/* Comprehensive fix for input containers and overflow issues */
+
+/* Base input field improvements for all text fields with suffixes */
+.v-text-field .v-text-field__slot {
+  min-width: 100px !important;
+  width: auto !important;
+  overflow: visible !important;
+}
+
+.v-text-field .v-text-field__slot input {
+  padding-right: 35px !important;
+  padding-left: 12px !important;
+  text-align: left !important;
+  width: 100% !important;
+  min-width: 70px !important;
+  box-sizing: border-box !important;
+}
+
+/* Specific fixes for slider inputs and dense components */
+.v-input._slider-input,
+.v-input--dense {
+  min-width: 110px !important;
+  width: auto !important;
+  max-width: none !important;
+  flex: 0 1 auto !important;
+}
+
+.v-input._slider-input .v-input__control,
+.v-input--dense .v-input__control {
+  min-width: 110px !important;
+  width: 100% !important;
+}
+
+.v-input._slider-input .v-input__slot,
+.v-input--dense .v-input__slot {
+  min-width: 110px !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+.v-input._slider-input .v-text-field__slot,
+.v-input--dense .v-text-field__slot {
+  min-width: 110px !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.v-input._slider-input .v-text-field__slot input,
+.v-input--dense .v-text-field__slot input {
+  padding-right: 35px !important;
+  padding-left: 12px !important;
+  min-width: 70px !important;
+  width: calc(100% - 47px) !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+/* Suffix positioning and styling */
+.v-text-field .v-text-field__suffix {
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  background-color: transparent !important;
+  color: var(--ctp-subtext1) !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+
+/* Outlined input adjustments */
+.v-text-field--outlined .v-text-field__slot {
+  min-width: 110px !important;
+}
+
+.v-text-field--outlined .v-text-field__slot input {
+  padding-right: 35px !important;
+  padding-left: 12px !important;
+}
+
+/* Container adjustments to prevent overflow */
+.v-input._slider-input .v-input__control .v-input__slot,
+.v-input--dense .v-input__control .v-input__slot {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Prevent text from overflowing container boundaries */
+.v-text-field fieldset {
+  min-width: 110px !important;
+}
+
+/* Additional fix for position inputs like in your screenshot */
+.v-text-field input[type="number"] {
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+/* Reset/clear button styling - only for text fields with clear buttons */
+.v-text-field .v-input__append-inner .v-btn[aria-label*="clear"],
+.v-text-field .v-input__append-inner .v-btn[title*="clear"],
+.v-text-field .v-input__append-inner .v-btn .mdi-close {
+  background-color: transparent !important;
+  color: var(--ctp-subtext0) !important;
+  border-radius: 0 12px 12px 0 !important;
+  margin: -1px -1px -1px 0 !important;
+  padding: 0 8px !important;
+  min-width: 32px !important;
+  transition: all 0.2s ease !important;
+}
+
+.v-text-field .v-input__append-inner .v-btn[aria-label*="clear"]:hover,
+.v-text-field .v-input__append-inner .v-btn[title*="clear"]:hover,
+.v-text-field .v-input__append-inner .v-btn .mdi-close:hover {
+  color: var(--ctp-red) !important;
+  background-color: rgba(243, 139, 168, 0.1) !important;
+}
+
+/* ===== Enhanced Sliders ===== */
+.v-slider {
+  margin: 8px 0 !important;
+}
+
+.v-slider__track-background {
+  background-color: var(--ctp-surface0) !important;
+  border-radius: 8px !important;
+}
+
+.v-slider__track-fill {
+  background-color: var(--ctp-blue) !important;
+  border-radius: 8px !important;
+}
+
+.v-slider__thumb {
+  background-color: var(--ctp-blue) !important;
+  border: 2px solid var(--ctp-base) !important;
+  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.3) !important;
+}
+
+.v-slider__thumb:hover {
+  transform: scale(1.1) !important;
+}
+
+/* Fix slider container alignment */
+.v-input--slider {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.v-input--slider .v-input__prepend-outer,
+.v-input--slider .v-input__append-outer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  min-height: 32px !important;
+}
+
+.v-input--slider .v-input__prepend-outer .v-btn,
+.v-input--slider .v-input__append-outer .v-btn {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-subtext1) !important;
+  border-radius: 8px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  margin: 0 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+
+.v-input--slider .v-input__prepend-outer .v-btn:hover,
+.v-input--slider .v-input__append-outer .v-btn:hover {
+  background-color: var(--ctp-blue) !important;
+  color: var(--ctp-base) !important;
+}
+
+.v-input--slider .v-input__prepend-outer .v-icon,
+.v-input--slider .v-input__append-outer .v-icon {
+  font-size: 16px !important;
+  margin: 0 !important;
+}
+
+/* Fix slider control wrapper alignment */
+.v-input--slider .v-input__control {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 32px !important;
+}
+
+.v-input--slider .v-slider {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ===== Enhanced Select Dropdowns ===== */
+.v-select .v-input__append-inner {
+  background-color: var(--ctp-surface1) !important;
+  border-radius: 0 12px 12px 0 !important;
+  border-left: 1px solid var(--ctp-surface2) !important;
+  margin: -1px -1px -1px 0 !important;
+  padding: 0 8px !important;
+  min-width: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.v-select .v-input__append-inner .v-icon {
+  color: var(--ctp-subtext1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.v-select .v-input__append-inner:hover .v-icon {
+  color: var(--ctp-blue) !important;
+}
+
+/* Prevent styling collapsible panel buttons and other interface buttons */
+.v-expansion-panel-header .v-btn,
+.v-toolbar .v-btn,
+.v-app-bar .v-btn,
+.v-card-title .v-btn,
+.v-card-actions .v-btn:not(.v-btn--contained):not(.v-btn--outlined) {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  margin: 2px !important;
+}
+
+/* Make toolbars/app bars smaller to create natural spacing */
+.v-toolbar,
+.v-app-bar {
+  min-height: 48px !important;
+  height: 48px !important;
+  padding: 2px 8px !important;
+}
+
+.v-toolbar .v-toolbar__content,
+.v-app-bar .v-toolbar__content {
+  padding: 0 !important;
+}
+
+/* Fix toolbar items alignment in panel headers */
+.panel header .v-toolbar__items,
+.v-card header .v-toolbar__items,
+.temperature-panel header .v-toolbar__items,
+.machine-settings-panel header .v-toolbar__items,
+.extruder-control-panel header .v-toolbar__items,
+.miscellaneous-panel header .v-toolbar__items {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  height: 100% !important;
+  gap: 4px !important;
+}
+
+/* Add horizontal gaps to app bar toolbar items too */
+.v-app-bar .v-toolbar__items {
+  gap: 4px !important;
+}
+
+/* Add gap to dialog toolbar items */
+#app > div.v-dialog__content.v-dialog__content--active > div > div > header > div > div.v-toolbar__items {
+  gap: 4px !important;
+}
+
+/* Add gaps to specific toolbar item containers */
+#page-container > div > div > div.col-4.col > div > header > div > div.v-toolbar__items > div,
+#page-container .col-4 header .v-toolbar__items > div {
+  gap: 4px !important;
+  display: flex !important;
+}
+
+/* Add gaps to main app header */
+#app > div.v-application--wrap > div:nth-child(2) > header > div,
+.v-application--wrap > div:nth-child(2) > header > div {
+  gap: 4px !important;
+  display: flex !important;
+}
+
+/* Fix select dropdown append-inner height in data tables */
+.v-data-footer .v-select .v-input__append-inner,
+.v-data-table .v-select .v-input__append-inner,
+.files-table .v-select .v-input__append-inner,
+.machine-configfiles-panel .v-select .v-input__append-inner {
+  height: 100% !important;
+  min-height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ensure select dropdown buttons match input height */
+.v-data-footer .v-select .v-input__append-inner .v-btn,
+.v-data-table .v-select .v-input__append-inner .v-btn,
+.files-table .v-select .v-input__append-inner .v-btn,
+.machine-configfiles-panel .v-select .v-input__append-inner .v-btn {
+  height: 100% !important;
+  min-height: 36px !important;
+}
+
+/* Fix data table footer select styling - ULTRA aggressive underline removal */
+.v-data-footer .v-select,
+.v-data-footer .v-select *,
+.v-data-footer .v-select *::before,
+.v-data-footer .v-select *::after,
+.v-data-table .v-data-footer .v-select,
+.v-data-table .v-data-footer .v-select *,
+.files-table .v-data-footer .v-select,
+.files-table .v-data-footer .v-select *,
+.gcode-files-panel .v-data-footer .v-select,
+.gcode-files-panel .v-data-footer .v-select *,
+.machine-configfiles-panel .v-data-footer .v-select,
+.machine-configfiles-panel .v-data-footer .v-select * {
+  border: none !important;
+  border-bottom: none !important;
+  border-bottom-width: 0 !important;
+  border-bottom-style: none !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.v-data-footer .v-input--is-focused .v-input__slot::before,
+.v-data-footer .v-input--is-focused .v-input__slot::after,
+.v-data-footer .v-input__slot::before,
+.v-data-footer .v-input__slot::after,
+.gcode-files-panel .v-data-footer .v-input--is-focused .v-input__slot::before,
+.gcode-files-panel .v-data-footer .v-input--is-focused .v-input__slot::after,
+.gcode-files-panel .v-data-footer .v-input__slot::before,
+.gcode-files-panel .v-data-footer .v-input__slot::after {
+  border-bottom: none !important;
+  border-bottom-width: 0 !important;
+  display: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+}
+
+/* Adjust backdrop proportions - longer input, shorter button */
+.v-data-footer .v-select .v-input__slot,
+.v-data-table .v-data-footer .v-select .v-input__slot,
+.files-table .v-data-footer .v-select .v-input__slot,
+.gcode-files-panel .v-data-footer .v-select .v-input__slot,
+.machine-configfiles-panel .v-data-footer .v-select .v-input__slot {
+  border: none !important;
+  border-bottom: none !important;
+  padding-left: 12px !important;
+  padding-right: 8px !important;
+  flex: 1 !important;
+  background-color: var(--ctp-surface0) !important;
+  border-radius: 12px 0 0 12px !important;
+}
+
+.v-data-footer .v-select input,
+.v-data-table .v-data-footer .v-select input,
+.files-table .v-data-footer .v-select input,
+.gcode-files-panel .v-data-footer .v-select input,
+.machine-configfiles-panel .v-data-footer .v-select input {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Shorter dropdown button backdrop positioned at rightmost edge */
+.v-data-footer .v-select .v-input__append-inner,
+.gcode-files-panel .v-data-footer .v-select .v-input__append-inner {
+  width: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  margin: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  background-color: var(--ctp-surface1) !important;
+  border-radius: 0 12px 12px 0 !important;
+  border-left: 1px solid var(--ctp-surface2) !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  height: 100% !important;
+}
+
+/* Ensure the parent select container allows absolute positioning */
+.v-data-footer .v-select,
+.gcode-files-panel .v-data-footer .v-select {
+  position: relative !important;
+}
+
+/* Adjust input area to not overlap with positioned button */
+.v-data-footer .v-select .v-input__slot,
+.v-data-table .v-data-footer .v-select .v-input__slot,
+.files-table .v-data-footer .v-select .v-input__slot,
+.gcode-files-panel .v-data-footer .v-select .v-input__slot,
+.machine-configfiles-panel .v-data-footer .v-select .v-input__slot {
+  border: none !important;
+  border-bottom: none !important;
+  padding-left: 12px !important;
+  padding-right: 40px !important;
+  flex: 1 !important;
+  background-color: var(--ctp-surface0) !important;
+  border-radius: 12px !important;
+  margin-right: 0 !important;
+}
+
+/* Clean button styling without margins */
+.v-toolbar__items .v-btn,
+.panel header .v-toolbar__items .v-btn,
+.temperature-panel header .v-toolbar__items .v-btn,
+.machine-settings-panel header .v-toolbar__items .v-btn,
+.extruder-control-panel header .v-toolbar__items .v-btn,
+.v-card header .v-toolbar__items .v-btn,
+.v-app-bar .v-btn,
+.v-toolbar--prominent .v-btn,
+.v-toolbar:not(.v-sheet) .v-btn {
+  margin: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  align-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Override spin button group positioning */
+._spin_button_group {
+  margin-top: -8px !important;
+  margin-left: 6px !important;
+}
+
+/* Card text container alignment - regardless of panel */
+.panel .container .v-card__text.pa-0.d-flex.align-center > div,
+.panel .v-card__text.py-0.pb-2.d-flex.align-center > div,
+.v-card .container .v-card__text.pa-0.d-flex.align-center > div,
+.v-card .v-card__text.py-0.pb-2.d-flex.align-center > div,
+.extruder-control-panel .container .v-card__text.pa-0.d-flex.align-center > div,
+.extruder-control-panel .v-card__text.py-0.pb-2.d-flex.align-center > div,
+.machine-settings-panel .container .v-card__text.pa-0.d-flex.align-center > div,
+.machine-settings-panel .v-card__text.py-0.pb-2.d-flex.align-center > div,
+.temperature-panel .container .v-card__text.pa-0.d-flex.align-center > div,
+.temperature-panel .v-card__text.py-0.pb-2.d-flex.align-center > div,
+.miscellaneous-panel .v-card__text.py-0.pb-2.d-flex.align-center > div {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Fix collapsible panel styling */
+.v-expansion-panel-header .v-btn .v-icon {
+  color: var(--ctp-subtext1) !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.v-expansion-panel-header .v-btn:hover .v-icon {
+  color: var(--ctp-blue) !important;
+}
+
+/* Settings panel fold/collapse button specific styling */
+.v-toolbar .v-btn .v-icon,
+.v-app-bar .v-btn .v-icon {
+  color: var(--ctp-subtext1) !important;
+  transition: color 0.2s ease !important;
+}
+
+.v-toolbar .v-btn:hover .v-icon,
+.v-app-bar .v-btn:hover .v-icon {
+  color: var(--ctp-blue) !important;
+}
+
+/* ===== Tables - Enhanced Rounding ===== */
+.v-data-table {
+  background-color: var(--ctp-mantle) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.v-data-table__wrapper {
+  border-radius: 16px !important;
+}
+
+.v-data-table th {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--ctp-surface1) !important;
+}
+
+.v-data-table td {
+  color: var(--ctp-subtext1) !important;
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+}
+
+.v-data-table tr:hover {
+  background-color: var(--ctp-surface0) !important;
+}
+
+/* ===== Navigation List Items - Full Width, No Gaps ===== */
+.v-navigation-drawer .v-list {
+  background-color: transparent !important;
+  padding: 4px 0 !important;
+}
+
+.v-navigation-drawer .v-list-item {
+  color: var(--ctp-subtext1) !important;
+  border-radius: 0 12px 12px 0 !important;
+  margin: 2px 0 2px 0 !important;
+  padding: 12px 16px 12px 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  min-height: 48px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.v-navigation-drawer .v-list-item:hover {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 0 16px 16px 0 !important;
+  margin-right: -4px !important;
+  padding-right: 20px !important;
+  box-shadow: 2px 0 8px rgba(69, 71, 90, 0.3) !important;
+}
+
+.v-navigation-drawer .v-list-item--active {
+  background: linear-gradient(90deg, var(--ctp-blue), var(--ctp-sapphire)) !important;
+  color: var(--ctp-crust) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.3), 2px 0 12px rgba(137, 180, 250, 0.2) !important;
+  margin: 2px 0 2px 0 !important;
+  border-radius: 0 16px 16px 0 !important;
+  margin-right: -6px !important;
+  padding-right: 22px !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+.v-navigation-drawer .v-list-item--active .v-list-item__content {
+  color: var(--ctp-crust) !important;
+}
+
+.v-navigation-drawer .v-list-item--active .v-icon {
+  color: var(--ctp-crust) !important;
+}
+
+/* Ensure all text in active items is dark for maximum contrast */
+.v-navigation-drawer .v-list-item--active * {
+  color: var(--ctp-crust) !important;
+}
+
+/* Fix icon alignment in sidebar with proper spacing */
+.v-navigation-drawer .v-list-item .v-list-item__action:first-child {
+  margin-right: 20px !important;
+  min-width: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.v-navigation-drawer .v-list-item .v-icon {
+  font-size: 20px !important;
+  margin-right: 4px !important;
+}
+
+/* Remove Vuetify default icon margins while preserving my-3 utility */
+.v-navigation-drawer .v-list-item__icon {
+  margin: 0 20px 0 0 !important;
+  align-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-width: 24px !important;
+}
+
+/* Preserve my-3 margin utility */
+.v-application .my-3 {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Ensure proper icon container alignment */
+.v-navigation-drawer .v-list-item__action {
+  margin: 0 20px 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-width: 24px !important;
+}
+
+/* Better spacing for icons in general */
+.v-navigation-drawer .v-list-item .v-avatar {
+  margin-right: 20px !important;
+}
+
+/* Ensure consistent button alignment in main content */
+.v-main .v-btn {
+  margin: 2px !important;
+}
+
+/* ===== Sheets and Surfaces ===== */
+.v-sheet {
+  background-color: var(--ctp-mantle) !important;
+}
+
+/* ===== Dialogs ===== */
+.v-dialog .v-card {
+  background-color: var(--ctp-mantle) !important;
+}
+
+/* ===== Menus - Enhanced Rounding ===== */
+.v-menu__content {
+  background-color: var(--ctp-surface1) !important;
+  border: 1px solid var(--ctp-surface2) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(17, 17, 27, 0.4) !important;
+  overflow: hidden !important;
+}
+
+.v-menu__content .v-list-item {
+  border-radius: 8px !important;
+  margin: 4px 8px !important;
+}
+
+/* ===== Progress Bars - Enhanced Rounding ===== */
+.v-progress-linear {
+  background-color: var(--ctp-surface0) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.v-progress-linear__determinate {
+  background: linear-gradient(90deg, var(--ctp-green), var(--ctp-blue), var(--ctp-sapphire)) !important;
+  border-radius: 8px !important;
+}
+
+/* ===== Enhanced Status Colors with Backgrounds ===== */
+.success, .green, .v-alert--success {
+  color: var(--ctp-green) !important;
+  background-color: rgba(166, 227, 161, 0.1) !important;
+}
+
+.error, .red, .v-alert--error {
+  color: var(--ctp-red) !important;
+  background-color: rgba(243, 139, 168, 0.1) !important;
+}
+
+.warning, .orange, .yellow, .v-alert--warning {
+  color: var(--ctp-peach) !important;
+  background-color: rgba(250, 179, 135, 0.1) !important;
+}
+
+.info, .blue, .v-alert--info {
+  color: var(--ctp-sky) !important;
+  background-color: rgba(137, 220, 235, 0.1) !important;
+}
+
+/* Temperature indicators */
+.temp-cold {
+  color: var(--ctp-sky) !important;
+}
+
+.temp-warm {
+  color: var(--ctp-yellow) !important;
+}
+
+.temp-hot {
+  color: var(--ctp-peach) !important;
+}
+
+.temp-danger {
+  color: var(--ctp-red) !important;
+}
+
+/* ===== Scrollbars - Enhanced Rounding ===== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ctp-surface0);
+  border-radius: 8px;
+  margin: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ctp-surface2);
+  border-radius: 8px;
+  border: 2px solid var(--ctp-surface0);
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ctp-subtext0);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--ctp-surface0);
+  border-radius: 8px;
+}
+
+/* ===== Remove Gray Elements and Update Colors ===== */
+
+/* Fix gray backgrounds and surfaces */
+.v-chip {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 12px !important;
+}
+
+.v-chip--outlined {
+  border-color: var(--ctp-surface1) !important;
+  background-color: transparent !important;
+}
+
+.v-tooltip .v-overlay__content {
+  background-color: var(--ctp-surface1) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 8px !important;
+}
+
+.v-snackbar .v-snack__wrapper {
+  background-color: var(--ctp-surface1) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--ctp-surface2) !important;
+}
+
+.v-expansion-panel {
+  background-color: var(--ctp-mantle) !important;
+  border-radius: 12px !important;
+  margin: 4px 0 !important;
+}
+
+.v-expansion-panel-header {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.v-expansion-panel-content {
+  background-color: var(--ctp-mantle) !important;
+  color: var(--ctp-subtext1) !important;
+}
+
+/* Remove any remaining gray from system bars */
+.v-system-bar {
+  background-color: var(--ctp-crust) !important;
+  color: var(--ctp-text) !important;
+}
+
+.v-footer {
+  background-color: var(--ctp-mantle) !important;
+  color: var(--ctp-text) !important;
+}
+
+/* Fix tabs */
+.v-tabs {
+  background-color: transparent !important;
+}
+
+.v-tabs-bar {
+  background-color: transparent !important;
+}
+
+/* Specific override for dark theme tabs bar */
+.theme--dark.v-tabs > .v-tabs-bar {
+  background-color: var(--ctp-mantle) !important;
+}
+
+.v-tab {
+  color: var(--ctp-subtext1) !important;
+  border-radius: 12px 12px 0 0 !important;
+  margin-right: 4px !important;
+}
+
+.v-tab:hover {
+  color: var(--ctp-text) !important;
+  background-color: var(--ctp-surface0) !important;
+}
+
+.v-tab--active {
+  color: var(--ctp-blue) !important;
+  background-color: var(--ctp-mantle) !important;
+  border-bottom: 3px solid var(--ctp-blue) !important;
+}
+
+.v-tabs-slider {
+  background-color: var(--ctp-blue) !important;
+  height: 3px !important;
+}
+
+/* Fix any remaining default colors */
+.grey, .gray {
+  background-color: var(--ctp-surface1) !important;
+  color: var(--ctp-text) !important;
+}
+
+.grey--text, .gray--text {
+  color: var(--ctp-subtext1) !important;
+}
+
+/* Additional specific dark theme overrides */
+.theme--dark .v-tabs-bar {
+  background-color: var(--ctp-mantle) !important;
+}
+
+.theme--dark .v-btn {
+  color: var(--ctp-text) !important;
+}
+
+.theme--dark .v-btn:not(.primary):not(.secondary):not(.success):not(.warning):not(.error):not(.v-btn--outlined):not(.v-btn--text) {
+  background-color: var(--ctp-surface0) !important;
+}
+
+/* Catch any remaining gray backgrounds in dark theme */
+.theme--dark .grey,
+.theme--dark .gray {
+  background-color: var(--ctp-surface1) !important;
+}
+
+/* ===== Text Visibility Guarantees ===== */
+.v-application {
+  color: var(--ctp-text) !important;
+}
+
+/* ===== High Specificity Fixes for Common Elements ===== */
+.v-toolbar__content * {
+  color: var(--ctp-text) !important;
+}
+
+.v-list-item__content * {
+  color: inherit !important;
+}
+
+/* ===== Make sure text is always readable ===== */
+.theme--dark {
+  color: var(--ctp-text) !important;
+}
+
+.theme--dark .v-application {
+  color: var(--ctp-text) !important;
+}
+
+/* ===== Enhanced Accent Colors for Special Elements ===== */
+.primary {
+  background-color: var(--ctp-blue) !important;
+  border-color: var(--ctp-blue) !important;
+}
+
+.primary--text {
+  color: var(--ctp-blue) !important;
+}
+
+.secondary {
+  background-color: var(--ctp-mauve) !important;
+  border-color: var(--ctp-mauve) !important;
+}
+
+.secondary--text {
+  color: var(--ctp-mauve) !important;
+}
+
+.accent {
+  background-color: var(--ctp-pink) !important;
+  border-color: var(--ctp-pink) !important;
+}
+
+.accent--text {
+  color: var(--ctp-pink) !important;
+}
+
+/* ===== Enhanced Selection ===== */
+::selection {
+  background-color: rgba(137, 180, 250, 0.3) !important;
+  color: var(--ctp-text) !important;
+}
+
+::-moz-selection {
+  background-color: rgba(137, 180, 250, 0.3) !important;
+  color: var(--ctp-text) !important;
+}
+
+/* ===== Icon Colors ===== */
+.v-icon {
+  color: inherit !important;
+}
+
+.v-icon.primary--text {
+  color: var(--ctp-blue) !important;
+}
+
+.v-icon.secondary--text {
+  color: var(--ctp-mauve) !important;
+}
+
+.v-icon.success--text {
+  color: var(--ctp-green) !important;
+}
+
+.v-icon.warning--text {
+  color: var(--ctp-peach) !important;
+}
+
+.v-icon.error--text {
+  color: var(--ctp-red) !important;
+}
+
+/* ===== CodeMirror Syntax Highlighting - Catppuccin Mocha ===== */
+
+/* Main CodeMirror container styling */
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar,
+.vue-codemirror.codemirror,
+.CodeMirror {
+  background-color: var(--ctp-base) !important;
+  color: var(--ctp-text) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--ctp-surface0) !important;
+}
+
+/* Default text */
+.CodeMirror-code,
+.cm-s-default {
+  color: var(--ctp-text) !important;
+}
+
+/* Keywords (def, class, if, for, while, return, etc.) */
+.cm-keyword {
+  color: var(--ctp-mauve) !important;
+  font-weight: 600 !important;
+}
+
+/* Built-in functions and types */
+.cm-builtin,
+.cm-type {
+  color: var(--ctp-peach) !important;
+  font-weight: 500 !important;
+}
+
+/* Function definitions and calls */
+.cm-def,
+.cm-function {
+  color: var(--ctp-blue) !important;
+  font-weight: 500 !important;
+}
+
+/* Variables and identifiers */
+.cm-variable,
+.cm-variable-2,
+.cm-variable-3 {
+  color: var(--ctp-text) !important;
+}
+
+/* Strings */
+.cm-string {
+  color: var(--ctp-green) !important;
+}
+
+/* Numbers */
+.cm-number {
+  color: var(--ctp-peach) !important;
+}
+
+/* Comments */
+.cm-comment {
+  color: var(--ctp-subtext0) !important;
+  font-style: italic !important;
+}
+
+/* Operators (+, -, *, /, =, etc.) */
+.cm-operator {
+  color: var(--ctp-sapphire) !important;
+}
+
+/* Punctuation (brackets, parentheses, commas) */
+.cm-punctuation,
+.cm-bracket {
+  color: var(--ctp-text) !important;
+}
+
+/* Properties and attributes */
+.cm-property,
+.cm-attribute {
+  color: var(--ctp-blue) !important;
+}
+
+/* Tags (for HTML/XML) */
+.cm-tag {
+  color: var(--ctp-mauve) !important;
+}
+
+/* Meta information */
+.cm-meta {
+  color: var(--ctp-yellow) !important;
+}
+
+/* Qualifiers and special keywords */
+.cm-qualifier {
+  color: var(--ctp-mauve) !important;
+}
+
+/* Atoms (true, false, null, None, etc.) */
+.cm-atom {
+  color: var(--ctp-peach) !important;
+}
+
+/* Errors */
+.cm-error {
+  color: var(--ctp-red) !important;
+  background-color: rgba(243, 139, 168, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+/* Links */
+.cm-link {
+  color: var(--ctp-blue) !important;
+  text-decoration: underline !important;
+}
+
+/* Headers (for markdown) */
+.cm-header {
+  color: var(--ctp-blue) !important;
+  font-weight: bold !important;
+}
+
+/* Strong/Bold (for markdown) */
+.cm-strong {
+  color: var(--ctp-yellow) !important;
+  font-weight: bold !important;
+}
+
+/* Emphasis/Italic (for markdown) */
+.cm-em {
+  color: var(--ctp-green) !important;
+  font-style: italic !important;
+}
+
+/* Special characters */
+.cm-special {
+  color: var(--ctp-red) !important;
+}
+
+/* Current line highlight */
+.CodeMirror-activeline-background {
+  background-color: var(--ctp-surface0) !important;
+}
+
+/* Selection */
+.CodeMirror-selected {
+  background-color: rgba(137, 180, 250, 0.2) !important;
+}
+
+/* Cursor */
+.CodeMirror-cursor {
+  border-left: 2px solid var(--ctp-blue) !important;
+}
+
+/* Gutters (line numbers) */
+.CodeMirror-gutters {
+  background-color: var(--ctp-mantle) !important;
+  border-right: 1px solid var(--ctp-surface0) !important;
+}
+
+.CodeMirror-linenumber {
+  color: var(--ctp-subtext0) !important;
+  padding: 0 8px !important;
+}
+
+/* Focused editor */
+.CodeMirror-focused .CodeMirror-cursor {
+  border-left: 2px solid var(--ctp-blue) !important;
+}
+
+/* Scrollbars for CodeMirror */
+.CodeMirror-scrollbar-filler {
+  background-color: var(--ctp-base) !important;
+}
+
+.CodeMirror-gutter-filler {
+  background-color: var(--ctp-mantle) !important;
+}
+
+/* Matching brackets */
+.CodeMirror-matchingbracket {
+  background-color: rgba(137, 180, 250, 0.2) !important;
+  color: var(--ctp-blue) !important;
+  font-weight: bold !important;
+}
+
+/* Non-matching brackets */
+.CodeMirror-nonmatchingbracket {
+  background-color: rgba(243, 139, 168, 0.2) !important;
+  color: var(--ctp-red) !important;
+}
+
+/* Search highlighting */
+.CodeMirror-searching {
+  background-color: rgba(249, 226, 175, 0.3) !important;
+}
+
+/* Language-specific enhancements */
+
+/* Python-specific */
+.cm-s-default .cm-python-keyword {
+  color: var(--ctp-mauve) !important;
+}
+
+.cm-s-default .cm-python-builtin {
+  color: var(--ctp-peach) !important;
+}
+
+/* JavaScript/TypeScript-specific */
+.cm-s-default .cm-javascript-keyword {
+  color: var(--ctp-mauve) !important;
+}
+
+.cm-s-default .cm-typescript-keyword {
+  color: var(--ctp-mauve) !important;
+}
+
+/* JSON-specific */
+.cm-s-default .cm-json-property {
+  color: var(--ctp-blue) !important;
+}
+
+/* YAML-specific */
+.cm-s-default .cm-yaml-key {
+  color: var(--ctp-blue) !important;
+}
+
+/* G-code specific highlighting for 3D printing */
+.cm-gcode {
+  color: var(--ctp-text) !important;
+}
+
+.cm-gcode-command {
+  color: var(--ctp-blue) !important;
+  font-weight: bold !important;
+}
+
+.cm-gcode-parameter {
+  color: var(--ctp-green) !important;
+}
+
+.cm-gcode-value {
+  color: var(--ctp-peach) !important;
+}
+
+.cm-gcode-comment {
+  color: var(--ctp-subtext0) !important;
+  font-style: italic !important;
+}
+
+/* Specific targeting for the mentioned selector */
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .CodeMirror-code {
+  color: var(--ctp-text) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-keyword {
+  color: var(--ctp-mauve) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-string {
+  color: var(--ctp-green) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-number {
+  color: var(--ctp-peach) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-comment {
+  color: var(--ctp-subtext0) !important;
+  font-style: italic !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-operator {
+  color: var(--ctp-sapphire) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-function {
+  color: var(--ctp-blue) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-builtin {
+  color: var(--ctp-peach) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-atom {
+  color: var(--ctp-peach) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active > div > div > div > div > div.vue-codemirror.codemirror.withSidebar .cm-variable {
+  color: var(--ctp-text) !important;
+}
+
+/* ===== CodeMirror 6 Syntax Highlighting - Catppuccin Mocha ===== */
+
+/* Override CodeMirror 6 dynamically generated classes with Catppuccin colors */
+
+/* Keywords/Section Headers (ͼt) - [include], [stepper_x], [tmc2209] */
+.ͼt {
+  color: var(--ctp-mauve) !important;
+  font-weight: 600 !important;
+}
+
+/* Comments (ͼ13) - Lines starting with # */
+.ͼ13 {
+  color: var(--ctp-subtext0) !important;
+  font-style: italic !important;
+}
+
+/* Property Names (ͼp) - enable_pin:, step_pin:, etc. */
+.ͼp {
+  color: var(--ctp-blue) !important;
+  font-weight: 500 !important;
+}
+
+/* String Values (ͼy) - !P2.1, P2.2, pin names */
+.ͼy {
+  color: var(--ctp-green) !important;
+}
+
+/* Numeric Values (ͼv) - 16, 40, 0.8, etc. */
+.ͼv {
+  color: var(--ctp-peach) !important;
+}
+
+/* Ensure high specificity for dialog content */
+#app > div.v-dialog__content.v-dialog__content--active .ͼt {
+  color: var(--ctp-mauve) !important;
+  font-weight: 600 !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active .ͼ13 {
+  color: var(--ctp-subtext0) !important;
+  font-style: italic !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active .ͼp {
+  color: var(--ctp-blue) !important;
+  font-weight: 500 !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active .ͼy {
+  color: var(--ctp-green) !important;
+}
+
+#app > div.v-dialog__content.v-dialog__content--active .ͼv {
+  color: var(--ctp-peach) !important;
+}
+
+/* Additional common CodeMirror 6 classes that might appear */
+.ͼo { color: var(--ctp-sapphire) !important; } /* Operators */
+.ͼn { color: var(--ctp-red) !important; } /* Errors */
+.ͼs { color: var(--ctp-yellow) !important; } /* Special */
+.ͼb { color: var(--ctp-teal) !important; } /* Built-ins */
+.ͼm { color: var(--ctp-pink) !important; } /* Meta */
+.ͼa { color: var(--ctp-sky) !important; } /* Attributes */
+
+/* Default text color for CodeMirror content */
+.cm-content {
+  color: var(--ctp-text) !important;
+}
+
+/* Active line background */
+.cm-activeLine {
+  background-color: rgba(69, 71, 90, 0.3) !important;
+}
+
+/* Selection background */
+.cm-selectionBackground {
+  background-color: rgba(137, 180, 250, 0.2) !important;
+}
+
+/* ===== Data Footer V-Select Component Styling ===== */
+/* Fix for the v-select component in data footer that should look like a proper dropdown */
+
+/* Target the main v-select container in data footers */
+.v-data-footer .v-select,
+.gcode-files-panel .v-data-footer .v-select,
+.files-table .v-data-footer .v-select {
+  max-width: 120px !important;
+  min-width: 80px !important;
+}
+
+/* Style the main input slot */
+.v-data-footer .v-select .v-input__slot,
+.gcode-files-panel .v-data-footer .v-select .v-input__slot,
+.files-table .v-data-footer .v-select .v-input__slot {
+  background-color: var(--ctp-surface0) !important;
+  border: 1px solid var(--ctp-surface1) !important;
+  border-radius: 12px !important;
+  min-height: 40px !important;
+  padding: 0 !important; /* allow internal slot to control spacing */
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.v-data-footer .v-select .v-input__slot:hover,
+.gcode-files-panel .v-data-footer .v-select .v-input__slot:hover,
+.files-table .v-data-footer .v-select .v-input__slot:hover {
+  border-color: var(--ctp-blue) !important;
+  background-color: var(--ctp-surface1) !important;
+}
+
+/* Style the select slot area */
+.v-data-footer .v-select .v-select__slot,
+.gcode-files-panel .v-data-footer .v-select .v-select__slot,
+.files-table .v-data-footer .v-select .v-select__slot {
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+}
+
+/* Style the selected value display */
+.v-data-footer .v-select .v-select__selections,
+.gcode-files-panel .v-data-footer .v-select .v-select__selections,
+.files-table .v-data-footer .v-select .v-select__selections {
+  flex: 1 !important;
+  color: var(--ctp-text) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 100% !important;
+  order: 1 !important; /* ensure number is before arrow */
+}
+
+.v-data-footer .v-select .v-select__selection,
+.gcode-files-panel .v-data-footer .v-select .v-select__selection,
+.files-table .v-data-footer .v-select .v-select__selection {
+  color: var(--ctp-text) !important;
+  max-width: 100% !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* Ensure the selected value text is always visible with high specificity */
+.v-data-footer .v-select .v-select__selection--comma,
+.gcode-files-panel .v-data-footer .v-select .v-select__selection--comma,
+.files-table .v-data-footer .v-select .v-select__selection--comma {
+  color: var(--ctp-text) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  font-weight: 500 !important;
+}
+
+/* Ultra-aggressive text visibility for data footer select values */
+.v-data-footer .v-select div,
+.v-data-footer .v-select span,
+.gcode-files-panel .v-data-footer .v-select div,
+.gcode-files-panel .v-data-footer .v-select span,
+.files-table .v-data-footer .v-select div,
+.files-table .v-data-footer .v-select span {
+  color: var(--ctp-text) !important;
+}
+
+/* Force text color on any text content inside data footer selects */
+.v-data-footer .v-input.v-select *,
+.gcode-files-panel .v-data-footer .v-input.v-select *,
+.files-table .v-data-footer .v-input.v-select * {
+  color: var(--ctp-text) !important;
+}
+
+/* Style the dropdown arrow */
+.v-data-footer .v-select .v-input__append-inner,
+.gcode-files-panel .v-data-footer .v-select .v-input__append-inner,
+.files-table .v-data-footer .v-select .v-input__append-inner {
+  background-color: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: static !important; /* keep in normal flow, to the right */
+  right: auto !important;
+  top: auto !important;
+  width: auto !important;
+  min-width: 24px !important;
+  max-width: none !important;
+  height: 100% !important;
+  align-self: center !important;
+  order: 2 !important;
+}
+
+.v-data-footer .v-select .v-input__append-inner .v-icon,
+.gcode-files-panel .v-data-footer .v-select .v-input__append-inner .v-icon,
+.files-table .v-data-footer .v-select .v-input__append-inner .v-icon {
+  color: var(--ctp-subtext1) !important;
+  font-size: 20px !important;
+  transition: color 0.2s ease !important;
+}
+
+.v-data-footer .v-select:hover .v-input__append-inner .v-icon,
+.gcode-files-panel .v-data-footer .v-select:hover .v-input__append-inner .v-icon,
+.files-table .v-data-footer .v-select:hover .v-input__append-inner .v-icon {
+  color: var(--ctp-blue) !important;
+}
+
+/* Hide the hidden input */
+.v-data-footer .v-select input[type="hidden"],
+.gcode-files-panel .v-data-footer .v-select input[type="hidden"],
+.files-table .v-data-footer .v-select input[type="hidden"] {
+  display: none !important;
+}
+
+/* Style the readonly input */
+.v-data-footer .v-select input[readonly],
+.gcode-files-panel .v-data-footer .v-select input[readonly],
+.files-table .v-data-footer .v-select input[readonly] {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Remove focus outline since we're using custom styling */
+.v-data-footer .v-select.v-input--is-focused .v-input__slot,
+.gcode-files-panel .v-data-footer .v-select.v-input--is-focused .v-input__slot,
+.files-table .v-data-footer .v-select.v-input--is-focused .v-input__slot {
+  border-color: var(--ctp-blue) !important;
+  box-shadow: 0 0 0 2px rgba(137, 180, 250, 0.2) !important;
+}
+
+/* ===== Logo Replacement ===== */
+/* Replace SVG logo with PNG logo */
+#app > div.v-application--wrap > div:nth-child(2) > header > div > a svg {
+  display: none !important;
+}
+
+#app > div.v-application--wrap > div:nth-child(2) > header > div > a {
+  background-image: url('./logo.png') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: inline-block !important;
+}
